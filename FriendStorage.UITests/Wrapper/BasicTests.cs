@@ -62,6 +62,23 @@ namespace FriendStorage.UI.Wrapper.Tests
                 throw;
             }
         }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ShouldThrowArgumentNullExceptionIfEmailsCollectionIsNull()
+        {
+            try
+            {
+                _friend.Emails = null;
+                var wrapper = new FriendWrapper(_friend);
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.AreEqual("Emails can't be Null", ex.Message);
+                throw;
+            }
+        }
+
         [TestMethod()]
         public void ShouldGetValuOfUnderlyningModelProperty()
         {

@@ -15,11 +15,27 @@ namespace FriendStorage.UI.Wrapper
         public FriendWrapper(Friend model) : base(model)
         {
             InitializeComplexPropertes(model);
+            InitializeCollectionPropertes(model);
         }
+
+        private void InitializeCollectionPropertes(Friend model)
+        {
+            if (model.Emails == null)
+            {
+                throw new ArgumentException("Emails can't be Null");
+            }
+            Emails = new ObservableCollection<FriendEmailWrapper>(
+                         model.Emails.Select(e => new FriendEmailWrapper(e)));
+            RegisterCollection(Emails, model.Emails);
+
+        }
+
+       
+
 
         private void InitializeComplexPropertes(Friend model)
         {
-            if(model.Address == null)
+            if (model.Address == null)
             {
                 throw new ArgumentException("Address can't be Null");
             }
@@ -44,7 +60,7 @@ namespace FriendStorage.UI.Wrapper
             set { SetValue(value); }
         }
 
-        public string LasstName
+        public string LastName
         {
             get { return GetValue<string>(); }
             set { SetValue(value); }
@@ -64,6 +80,7 @@ namespace FriendStorage.UI.Wrapper
 
         public AddressWrapper Address { get; private set; }
 
+        public ObservableCollection<FriendEmailWrapper> Emails { get; private set; }
         //public ObservableCollection<FriendEmailWrapper> Emails { get; private set; }
     }
 }
