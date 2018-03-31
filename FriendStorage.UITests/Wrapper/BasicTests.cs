@@ -69,7 +69,7 @@ namespace FriendStorage.UI.Wrapper.Tests
         {
             try
             {
-                _friend.Emails = null;
+                _friend.Emails = null; 
                 var wrapper = new FriendWrapper(_friend);
             }
             catch (ArgumentException ex)
